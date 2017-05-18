@@ -1,0 +1,35 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="sl-shopstock-data">
+
+  <script>
+  (function() {
+    var shopstockItems = [
+      {
+        name: "Need More of This Thing",
+        description: "Need More of This Thing Description"
+      }
+    ];
+
+    Polymer({
+
+      is: 'sl-shopstock-data',
+
+      properties: {
+
+        shopstockName: String,
+
+        shopstockDescription: String,
+
+        shopstock: {
+          type: Array,
+          value: shopstockItems,
+          readOnly: true,
+          notify: true
+        }
+      }
+    });
+
+  })();
+  </script>
+</dom-module>

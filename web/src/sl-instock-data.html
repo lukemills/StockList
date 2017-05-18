@@ -1,0 +1,43 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="sl-instock-data">
+
+  <script>
+  (function() {
+    var instockItems = [
+      {
+        name: "Something Cool",
+        description: "Something Cool Description"
+      },
+      {
+        name: "Next Thing",
+        description: "Next Thing Description"
+      },
+      {
+        name: "Finally Done",
+        description: "Finally Done Description"
+      }
+    ];
+
+    Polymer({
+
+      is: 'sl-instock-data',
+
+      properties: {
+
+        instockName: String,
+
+        instockDescription: String,
+
+        instock: {
+          type: Array,
+          value: instockItems,
+          readOnly: true,
+          notify: true
+        }
+      }
+    });
+
+  })();
+  </script>
+</dom-module>

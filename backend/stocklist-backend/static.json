@@ -1,0 +1,154 @@
+[
+  {
+    "name": "Kitchen",
+    "description": "The best kitchen ever, words about how cool this is",
+    "numItems": "6",
+    "stocks": {
+      "inStock": {
+        "numItems": "3",
+        "items": [
+          {
+            "name": "Kale",
+            "description": "Grosss Item Description",
+            "quantity": "100",
+            "unitOfMeasure": "oz",
+            "brand": "Big Words Brand",
+            "image": "kale.png",
+            "upc": "1234567890"
+          },
+          {
+            "name": "Crackers",
+            "description": "yum, yum, I like crackers",
+            "quantity": "8",
+            "unitOfMeasure": "count",
+            "brand": "Da Real Peanut Butta",
+            "image": "crackers.png",
+            "upc": "1234567891"
+          },
+          {
+            "name": "Flower",
+            "description": "Wrong kinda flour you moron",
+            "quantity": "5",
+            "unitOfMeasure": "cups",
+            "brand": "General Mills",
+            "image": "flower.png",
+            "upc": "1234567892"
+          }
+        ]
+      },
+      "outStock": {
+        "numItems": "2",
+        "items": [
+          {
+            "name": "Frozen Pizza",
+            "description": "I eat a lot of these, they are quick",
+            "quantity": "1",
+            "unitOfMeasure": "count",
+            "brand": "Delivery",
+            "image": "pizza.png",
+            "upc": "1234567893"
+          },
+          {
+            "name": "Flower",
+            "description": "Wrong kinda flour you moron",
+            "quantity": "5",
+            "unitOfMeasure": "cups",
+            "brand": "General Mills",
+            "image": "flower.png",
+            "upc": "1234567894"
+          }
+        ]
+      },
+      "shopStock": {
+        "numItems": "1",
+        "items": [
+          {
+            "name": "Chicken",
+            "description": "Who killed big bird",
+            "quantity": "10",
+            "unitOfMeasure": "count",
+            "brand": "Farm Fresh",
+            "image": "chicken.png",
+            "upc": "1234567895"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "name": "House",
+    "description": "Stuff I need to buy for the house",
+    "numItems": "6",
+    "stocks": {
+      "inStock": {
+        "numItems": "3",
+        "items": [
+          {
+            "name": "Bedroom flooring",
+            "description": "Need to remove the carpet from my room, and install new flooring",
+            "quantity": "1",
+            "unitOfMeasure": "count",
+            "brand": "Lowe's Flooring",
+            "image": "floor.png",
+            "upc": "0000000000"
+          },
+          {
+            "name": "Paint Blue (Retro Colonial Blue)",
+            "description": "Paint for my bedroom",
+            "quantity": "2",
+            "unitOfMeasure": "gallons",
+            "brand": "Valspar",
+            "image": "bluepaint.png",
+            "upc": "1234567896"
+          },
+          {
+            "name": "Paint Grey (Mountain Smoke)",
+            "description": "Paint for living room",
+            "quantity": "2",
+            "unitOfMeasure": "gallons",
+            "brand": "Valspar",
+            "image": "greypaint.png",
+            "upc": "1234567897"
+          }
+        ]
+      },
+      "outStock": {
+        "numItems": "1",
+        "items": [
+          {
+            "name": "Air Filters",
+            "description": "Filter size 20 x 25 x 1",
+            "quantity": "2",
+            "unitOfMeasure": "count",
+            "brand": "Off brand",
+            "image": "filter.png",
+            "upc": "1234567898"
+          }
+        ]
+      },
+      "shopStock": {
+        "numItems": "2",
+        "items": [
+          {
+            "name": "Ply Wood",
+            "description": "To put in the attic",
+            "quantity": "na",
+            "unitOfMeasure": "planks",
+            "brand": "Lowe's",
+            "image": "ply.png",
+            "upc": "0000000000"
+          },
+          {
+            "name": "Shower",
+            "description": "Shower to install in the basment",
+            "quantity": "1",
+            "unitOfMeasure": "count",
+            "brand": "Home Depot",
+            "image": "shower.png",
+            "upc": "0000000000"
+          }
+        ]
+      }
+    }
+  }
+]

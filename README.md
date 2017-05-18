@@ -1,2 +1,2 @@
 # StockList
-An cross-platform inventory management system for small businesses and individuals.
+A cross-platform inventory management system for small businesses and individuals.

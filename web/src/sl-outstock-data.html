@@ -1,0 +1,30 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="sl-outstock-data">
+
+  <script>
+  (function() {
+    var outstockItems = [];
+
+    Polymer({
+
+      is: 'sl-outstock-data',
+
+      properties: {
+
+        outstockName: String,
+
+        outstockDescription: String,
+
+        outstock: {
+          type: Array,
+          value: outstockItems,
+          readOnly: true,
+          notify: true
+        }
+      }
+    });
+
+  })();
+  </script>
+</dom-module>

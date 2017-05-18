@@ -1,0 +1,17 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/sl-app.html",
+  "fragments": [
+    "src/sl-instock.html",
+    "src/sl-view404.html"
+  ],
+  "sourceGlobs": [
+    "src/**/*",
+    "images/**/*",
+    "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

@@ -1,0 +1,105 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights editd.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-dropdown/iron-dropdown.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
+<link rel="import" href="../bower_components/iron-grid/iron-grid.html">
+<link rel="import" href="shared-styles.html">
+
+<link rel="import" href="sl-edit-item.html">
+
+<dom-module id="sl-item">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: flex;
+
+        padding: 10px;
+      }
+
+      paper-card {
+        max-width: 500px;
+      }
+      .item-header { @apply(--paper-font-headline); }
+      .item-light { color: var(--paper-grey-600); }
+      .item-favorite {
+        float: right;
+        vertical-align: middle;
+      }
+      .item-footer {
+        font-size: 14px;
+        vertical-align: middle;
+      }
+      .item-right {
+        float: right;
+      }
+      .item-edit {
+        float: left;
+      }
+      .dropdown-content {
+        background-color: white;
+        line-height: 20px;
+        font-size: 18px;
+        border-radius: 3px;
+        box-shadow: 0px 2px 6px #ccc;
+        padding: 0.5em 2em;
+        max-width: 250px;
+      }
+      iron-icon.star {
+      color: var(--paper-grey-500);
+      }
+    </style>
+
+    <paper-card>
+      <div class="card-content">
+        <div class="item-header">
+          [[item.name]]
+          <paper-icon-button id="move" class="item-right" on-click="moveOpen" icon="forward"></paper-icon-button>
+          <paper-tooltip for="move">Move</paper-tooltip>
+          <iron-dropdown id="move" class="move" horizontal-align="right" vertical-align="top">
+            <div class="dropdown-content">OutStock</div>
+            <div class="dropdown-content">ShopStock</div>
+          </iron-dropdown>
+        </div>
+        <p class="item-light">[[item.description]]</p>
+      </div>
+      <div class="card-actions">
+        <div class="item-footer item-light">
+          <paper-icon-button onClick="editModal.open()" icon="settings"></paper-icon-button>
+          <div class="item-right">
+            <paper-icon-button icon="remove"></paper-icon-button>
+            <span>[[item.quantity]] [[item.unit_of_measure]]</span>
+            <paper-icon-button icon="add"></paper-icon-button>
+          </div>
+        </div>
+      </div>
+    </paper-card>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'sl-item',
+
+      properties: {
+        item: Object
+      },
+
+      moveOpen: function() {
+        this.$.move.toggle();
+      }
+    });
+  </script>
+</dom-module>

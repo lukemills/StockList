@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="units_array">
+        <item>Ounces</item>
+        <item>Count</item>
+        <item>Serving</item>
+        <item>Gallons</item>
+        <item>Liters</item>
+        <item>Grams</item>
+    </string-array>
+    <string-array name="instock_move_array">
+        <item>OutStock</item>
+        <item>ShopStock</item>
+    </string-array>
+
+    <string-array name="outstock_move_array">
+        <item>ShopStock</item>
+        <item>InStock</item>
+    </string-array>
+
+    <string-array name="shopstock_move_array">
+        <item>InStock</item>
+        <item>OutStock</item>
+    </string-array>
+</resources>

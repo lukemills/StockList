@@ -1,0 +1,43 @@
+"item": {
+  "name": "Item Name",
+  "description": "Item description.",
+  "quantity": "InStock: Current quantity; OutStock: 0; ShopStock: Quantity to purchase.",
+  "unitOfMeasure": "Unit of measurement.",
+  "brand": "Item brand",
+  "image": "image.png",
+  "barcode": "barcode.png",
+  "upc": "Product number read from barcode."
+}
+
+
+[{
+  "name": "List Name",
+  "description": "List description.",
+  "numItems": "Total number of items in list.",
+  "stocks": {
+    "inStock": {
+      "numItems": "Number of items in stock.",
+      "items": [
+        {
+          "item": "Item 1"
+        }
+      ]
+    },
+    "outStock": {
+      "numItems": "Number of items out of stock.",
+      "items": [
+        {
+          "item": "Item 1"
+        }
+      ]
+    },
+    "shopStock": {
+      "numItems": "Number of items to be purchased.",
+      "items": [
+        {
+          "item": "Item 1"
+        }
+      ]
+    }
+  }
+}]

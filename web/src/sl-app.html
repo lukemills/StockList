@@ -1,0 +1,275 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+
+<link rel="import" href="sl-stock.html">
+
+<link rel="import" href="sl-instock.html">
+<link rel="import" href="sl-outstock.html">
+<link rel="import" href="sl-shopstock.html">
+<link rel="import" href="sl-add-item.html">
+<link rel="import" href="sl-edit-item.html">
+
+<!-- Style files -->
+<link rel="import" href="sl-icons.html">
+<!--- Data files -->
+<link rel="import" href="sl-list-data.html">
+
+<dom-module id="sl-app">
+  <template>
+    <style>
+      :host {
+        --app-primary-color: #00E676;
+        --app-secondary-color: black;
+
+        display: block;
+      }
+
+      app-header {
+        color: #000;
+        background-color: var(--app-primary-color);
+      }
+      app-header paper-icon-button {
+        --paper-icon-button-ink-color: white;
+      }
+
+      paper-fab {
+        width: 20px;
+        height: 20px;
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-top: 10px;
+        position: fixed;
+        right: 35px;
+        top: 5px;
+        --paper-fab-background: var(--app-secondary-color);
+      }
+
+      paper-tabs a {
+        /* These mixins (from iron-flex-layout) center the link text. */
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        color: black;
+        text-decoration: none;
+      }
+
+      paper-tabs {
+        background-color: #F5F5F5;
+        color: black;
+        --paper-tabs-selection-bar-color: var(--app-secondary-color);
+      }
+
+      .drawer-list {
+        margin: 0 20px;
+      }
+
+      .drawer-list a {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+        color: var(--app-secondary-color);
+        line-height: 40px;
+      }
+
+      .drawer-list a.iron-selected {
+        color: black;
+        font-weight: bold;
+      }
+    </style>
+
+    <iron-ajax
+        id="getLists"
+        handle-as="json"
+        on-response="handleResponse"
+        debounce-duration="300">
+    </iron-ajax>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
+
+    <app-drawer-layout fullbleed>
+      <!-- Drawer content -->
+      <app-drawer id="drawer">
+        <app-toolbar>[[user.first_name]]'s StockList</app-toolbar>
+        <iron-selector
+            id="drawerList"
+            selected="0"
+            class="drawer-list"
+            role="navigation"
+            on-iron-select="_listChanged">
+          <template is="dom-repeat" items="[[lists]]" as="list">
+            <a href="/">[[list.list_name]]</a>
+          </template>
+        </iron-selector>
+      </app-drawer>
+
+      <!-- Main content -->
+      <app-header-layout has-scrolling-region>
+        <app-header condenses reveals effects="waterfall">
+          <app-toolbar>
+            <paper-icon-button icon="sl-icons:menu" drawer-toggle></paper-icon-button>
+            <div main-title>[[title]]</div>
+            <!-- <paper-fab icon="refresh" on-click="refreshList"></paper-fab> -->
+          </app-toolbar>
+          <iron-selector
+              id="tabList"
+              attr-for-selected="name"
+              selected="{{tabSelect}}"
+              class="tab-list"
+              role="navigation"
+              on-iron-select="_tabChanged">
+            <paper-tabs id="tabs" attr-for-selected="name" selected="{{tabSelect}}">
+              <paper-tab name="instock">INSTOCK</paper-tab>
+              <paper-tab name="outstock">OUTSTOCK</paper-tab>
+              <paper-tab name="shopstock">SHOPSTOCK</paper-tab>
+            </paper-tabs>
+          </iron-selector>
+        </app-header>
+
+        <sl-stock stock="[[stock]]"></sl-stock>
+        <iron-pages
+            selected="{{page}}"
+            attr-for-selected="name"
+            fallback-selection="view404"
+            role="main">
+          <sl-stock name="stock"></sl-stock>
+          <sl-view404 name="view404"></sl-view404>
+        </iron-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+
+    <sl-edit-item></sl-edit-item>
+    <sl-add-item userId="{{userId::change}}"></sl-add-item>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'sl-app',
+
+      properties: {
+        title: String,
+
+        tabSelect: String,
+
+        tabId: String,
+
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged',
+        },
+
+        userId: {
+          type: String,
+          value: '5900f89820dcb5429ba43f36'
+        },
+        user: {
+          type: Object,
+        },
+
+        lists: {
+          type: Array,
+        },
+
+        newItem: {
+          type: Array,
+          observer: 'addNewItem',
+        },
+
+        stock: {
+          type: Array,
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)',
+      ],
+
+      ready: function() {
+        this.$.getLists.url = 'http://hlr710vm.homelinux.com:5000/api/user/' + this.userId;
+        this.$.getLists.method = 'POST';
+        this.$.getLists.generateRequest();
+      },
+
+      refreshList: function() {
+        this.$.getLists.url = 'http://hlr710vm.homelinux.com:5000/api/user/' + this.userId;
+        this.$.getLists.generateRequest();
+        location.reload();
+      },
+
+      handleResponse: function() {
+        this.user = this.$.getLists.lastResponse;
+        this.lists = this.user.lists;
+        console.log('this');
+      },
+
+      _listChanged: function() {
+        this.title = this
+                      .lists[this.$.drawerList.selected]
+                      .list_name
+        this.tabSelect = "instock";
+        this._tabChanged();
+      },
+
+      _tabChanged: function() {
+        this.stock = this
+                      .lists
+                      [this.$.drawerList.selected]
+                      [this.tabSelect]
+                      .items;
+        this.tabId = this
+                      .lists
+                      [this.$.drawerList.selected]
+                      [this.tabSelect]
+                      ._id;
+      },
+
+      _routePageChanged: function(page) {
+        this.page = page || 'stock';
+
+        if (!this.$.drawer.persistent) {
+          this.$.drawer.close();
+        }
+      },
+
+      _pageChanged: function(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('sl-' + page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+
+      _showPage404: function() {
+        this.page = 'view404';
+      },
+    });
+  </script>
+</dom-module>

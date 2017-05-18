@@ -1,0 +1,34 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<dom-module id="sl-list-data">
+
+  <script>
+  (function() {
+    var userList = [{"description": "The best kitchen ever, words about how cool this is", "numItems": "6", "stocks": {"inStock": {"items": [{"description": "Grosss Item Description", "image": "kale.png", "unitOfMeasure": "oz", "quantity": "100", "upc": "1234567890", "brand": "Big Words Brand", "name": "Kale"}, {"description": "yum, yum, I like crackers", "image": "crackers.png", "unitOfMeasure": "count", "quantity": "8", "upc": "1234567891", "brand": "Da Real Peanut Butta", "name": "Crackers"}, {"description": "Wrong kinda flour you moron", "image": "flower.png", "unitOfMeasure": "cups", "quantity": "5", "upc": "1234567892", "brand": "General Mills", "name": "Flower"}], "numItems": "3"}, "shopStock": {"items": [{"description": "Who killed big bird", "image": "chicken.png", "unitOfMeasure": "count", "quantity": "10", "upc": "1234567895", "brand": "Farm Fresh", "name": "Chicken"}], "numItems": "1"}, "outStock": {"items": [{"description": "I eat a lot of these, they are quick", "image": "pizza.png", "unitOfMeasure": "count", "quantity": "1", "upc": "1234567893", "brand": "Delivery", "name": "Frozen Pizza"}, {"description": "Wrong kinda flour you moron", "image": "flower.png", "unitOfMeasure": "cups", "quantity": "5", "upc": "1234567894", "brand": "General Mills", "name": "Flower"}], "numItems": "2"}}, "name": "Kitchen"}, {"description": "Stuff I need to buy for the house", "numItems": "6", "stocks": {"inStock": {"items": [{"description": "Need to remove the carpet from my room, and install new flooring", "image": "floor.png", "unitOfMeasure": "count", "quantity": "1", "upc": "0000000000", "brand": "Lowe's Flooring", "name": "Bedroom flooring"}, {"description": "Paint for my bedroom", "image": "bluepaint.png", "unitOfMeasure": "gallons", "quantity": "2", "upc": "1234567896", "brand": "Valspar", "name": "Paint Blue (Retro Colonial Blue)"}, {"description": "Paint for living room", "image": "greypaint.png", "unitOfMeasure": "gallons", "quantity": "2", "upc": "1234567897", "brand": "Valspar", "name": "Paint Grey (Mountain Smoke)"}], "numItems": "3"}, "shopStock": {"items": [{"description": "To put in the attic", "image": "ply.png", "unitOfMeasure": "planks", "quantity": "na", "upc": "0000000000", "brand": "Lowe's", "name": "Ply Wood"}, {"description": "Shower to install in the basment", "image": "shower.png", "unitOfMeasure": "count", "quantity": "1", "upc": "0000000000", "brand": "Home Depot", "name": "Shower"}], "numItems": "2"}, "outStock": {"items": [{"description": "Filter size 20 x 25 x 1", "image": "filter.png", "unitOfMeasure": "count", "quantity": "2", "upc": "1234567898", "brand": "Off brand", "name": "Air Filters"}], "numItems": "1"}}, "name": "House"}]
+
+    Polymer({
+
+      is: 'sl-list-data',
+
+      properties: {
+
+        listName: String,
+
+        listDescription: String,
+
+        listNumItems: Number,
+
+        listStocks: Array,
+
+        lists: {
+          type: Array,
+          value: userList,
+          readOnly: true,
+          notify: true
+        }
+      }
+    });
+
+  })();
+  </script>
+</dom-module>

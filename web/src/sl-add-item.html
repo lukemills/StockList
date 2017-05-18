@@ -1,0 +1,116 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="sl-add-item">
+  <template>
+    <style include="shared-styles">
+      :host {
+        display: block;
+
+        padding: 10px;
+      }
+
+      paper-fab {
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+        position: fixed;
+        right: 35px;
+        bottom: 25px;
+        --paper-fab-background: var(--app-primary-color);
+      }
+
+      paper-input {
+        max-width: 400px;
+        margin: auto;
+      }
+
+      paper-dropdown-menu, paper-listbox {
+        width: 250px;
+      }
+      paper-dropdown-menu {
+        height: 200px;
+        margin: auto;
+        display: block;
+      }
+
+      paper-material {
+        width: 250px;
+        height: 645px;
+        display: none;
+        background: white;
+        margin-left: 10px;
+        margin-right: 60px;
+        margin-bottom: 30px;
+        position: fixed;
+        right: 0px;
+        bottom: 0px;
+        padding: 0.5em 2em;
+      }
+    </style>
+
+    <paper-fab icon="add" on-click="toggle"></paper-fab>
+
+    <paper-material id="addItemNew" class="addItem">
+      <h2>Add Item</h2>
+      <paper-input name="name" always-float-label label="Item Name"></paper-input>
+      <paper-input name="desc" always-float-label label="Item Description"></paper-input>
+      <paper-input name="brand" always-float-label label="Item Brand"></paper-input>
+      <paper-input name="upc" always-float-label label="Item UPC"></paper-input>
+      <paper-input name="quant" always-float-label label="Item Quantity"></paper-input>
+      <paper-dropdown-menu name="uom" label="Unit">
+        <paper-listbox class="dropdown-content" selected="1">
+          <paper-item>Count</paper-item>
+          <paper-item>Cups</paper-item>
+          <paper-item>Ounces</paper-item>
+          <paper-item>Gallons</paper-item>
+        </paper-listbox>
+      </paper-dropdown-menu>
+      <div class="buttons">
+        <paper-button on-click="toggle">Cancel</paper-button>
+        <paper-button on-click="toggle">Accept</paper-button>
+      </div>
+    </paper-material>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'sl-add-item',
+
+      properties: {
+        tabId: String,
+
+        userId: String,
+      },
+
+      toggle: function() {
+        var e = document.getElementById('addItemNew');
+
+        if(e.style.display == 'block') {
+          e.style.display = 'none';
+        } else {
+          e.style.display = 'block';
+        }
+      }
+    });
+  </script>
+</dom-module>
